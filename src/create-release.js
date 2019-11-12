@@ -4,7 +4,13 @@ const { GitHub, context } = require('@actions/github');
 async function run() {
   try {
     // Get authenticated GitHub client (Ocktokit): https://github.com/actions/toolkit/tree/master/packages/github#usage
-    
+    const github = new GitHub(process.env.GITHUB_TOKEN);
+    const { owner, repo } = context.repo;
+
+    const releaseName = core.getInput('release_name',  {required: true}).replace('/ref/tags/', '');
+    const draft = core.getInput('draft', {required: false}) === 'true';
+const tagNAme = core.getInput('tag_name', {required: false}) === 'true';
+
 
     // Get owner and repo from context of payload that triggered the action: https://help.github.com/en/github/automating-your-workflow-with-github-actions/events-that-trigger-workflows
     
